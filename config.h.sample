@@ -1,0 +1,8 @@
+#define MQTT_SERVER      _ip_address_or_hostname_of_MQTT_server_
+#define MQTT_SERVERPORT  _MQTT_server_port_usually_1883_
+#define MQTT_USERNAME    _MQTT_server_username_
+#define MQTT_KEY         _MQTT_server_password_
+#define MQTT_CHANNEL     _MQTT_server_channel_to_publish_under_
+
+#define WIFI_SSID        _your_wifi_ssid_
+#define WIFI_PASSWD      _your_wifi_password_
