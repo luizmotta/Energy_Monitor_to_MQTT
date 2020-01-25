@@ -3,6 +3,10 @@
  */
 
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
 
@@ -39,12 +43,6 @@ Adafruit_MQTT_Publish photocell = Adafruit_MQTT_Publish(&mqtt, MQTT_CHANNEL);
 /*
  * AUXILIARY FUNCTIONS
  */
-
-void reboot() {
-  wdt_disable();
-  wdt_enable(WDTO_15MS);
-  while (1) {}
-}
 
 void blink_ok() {
     digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
@@ -127,7 +125,7 @@ void loop() {
 
   // Reboots if time counter restarted, just in case
   if ( millis() < lastRun ) {
-     reboot();
+     ESP.restart();
   } else {
      lastRun = millis();
   }
