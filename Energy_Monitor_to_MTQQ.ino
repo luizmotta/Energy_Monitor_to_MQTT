@@ -88,7 +88,7 @@ void MQTT_connect() {
  */
 
 void setupOTA() {
-  ArduinoOTA.setHostname(OTA_PORT);
+  ArduinoOTA.setHostname(OTA_HOSTNAME);
   ArduinoOTA.setPort(OTA_PORT);
   ArduinoOTA.setHostname(OTA_HOSTNAME);
   ArduinoOTA.setPassword(OTA_PASSWD);
