@@ -88,18 +88,10 @@ void MQTT_connect() {
  */
 
 void setupOTA() {
-  // Port defaults to 8266
-  // ArduinoOTA.setPort(8266);
-
-  // Hostname defaults to esp8266-[ChipID]
-  // ArduinoOTA.setHostname("myesp8266");
-
-  // No authentication by default
-  // ArduinoOTA.setPassword("admin");
-
-  // Password can be set with it's md5 value as well
-  // MD5(admin) = 21232f297a57a5a743894a0e4a801fc3
-  // ArduinoOTA.setPasswordHash("21232f297a57a5a743894a0e4a801fc3");
+  ArduinoOTA.setHostname(OTA_PORT);
+  ArduinoOTA.setPort(OTA_PORT);
+  ArduinoOTA.setHostname(OTA_HOSTNAME);
+  ArduinoOTA.setPassword(OTA_PASSWD);
 
   ArduinoOTA.onStart([]() {
     String type;
@@ -141,7 +133,7 @@ void setupWifi() {
   Serial.print( "Connecting to " );
   Serial.println( WIFI_SSID );
  
-  WiFi.mode(WIFI_STA);
+  WiFi.mode( WIFI_STA );
   WiFi.begin( WIFI_SSID, WIFI_PASSWD );
  
   while (WiFi.status() != WL_CONNECTED) {
@@ -150,7 +142,7 @@ void setupWifi() {
   }
   Serial.println("");
   Serial.println("WiFi connected");
-  WiFi.printDiag(Serial);
+  //WiFi.printDiag(Serial);
 }
 
 void setup() {
@@ -196,9 +188,7 @@ void loop() {
   //Serial.println(sensorValue); //prints the values coming from the sensor on the screen
 
   if ( sensorValue > LDR_THRESHOLD ) {
-    
     if ( wasAboveThreshold == false ) { //only act on rising 
-      
       Serial.print("Pulse detected ");
       Serial.println(sensorValue);
       now = millis();
@@ -210,14 +200,13 @@ void loop() {
       }
 
       if ( ( lastPulse > 0 ) && ( now > ( lastSent + MAX_UPDATE_INTERVAL ) ) ) {
-
         energyConsumption = pulsesSinceSent * 3600000 / (now - lastSent) ;
-        
+
         sprintf( strData, "%u", energyConsumption );
         Serial.print(F("\nSending energy consumption val "));
         Serial.print(strData);
         Serial.print(" kWh...");
-        
+
         if (! photocell.publish(strData)) {
           Serial.println(F("Failed"));
         } else {
@@ -226,19 +215,12 @@ void loop() {
           Serial.println(F("OK!"));
           blink_ok();
         }
-          
       }
-
       lastPulse = now;
-      
     }
-    
     wasAboveThreshold = true;
-    
   } else {
-    
     wasAboveThreshold = false;
-    
   }
 
   delay(20);
