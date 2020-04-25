@@ -1,12 +1,24 @@
+/* MQTT server credentials */
 #define MQTT_SERVER      _ip_address_or_hostname_of_MQTT_server_
 #define MQTT_SERVERPORT  _MQTT_server_port_usually_1883_
 #define MQTT_USERNAME    _MQTT_server_username_
 #define MQTT_KEY         _MQTT_server_password_
 #define MQTT_CHANNEL     _MQTT_server_channel_to_publish_under_
 
+/* Wifi credentials */
 #define WIFI_SSID        _your_wifi_ssid_
 #define WIFI_PASSWD      _your_wifi_password_
 
+/* OTA credentials */
 #define OTA_PORT          _default_8266
 #define OTA_HOSTNAME      _OTA_hostname_
 #define OTA_PASSWD        _OTA_password_
+
+/* Send updates every X miliseconds at most, to prevent flooding of the server */
+#define MAX_UPDATE_INTERVAL 30000
+
+/* Pin to which the LDR is connected */
+#define SENSOR_PIN       A0
+
+/* Threshold  */
+#define LDR_THRESHOLD    200

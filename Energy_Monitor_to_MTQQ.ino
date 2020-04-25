@@ -16,10 +16,7 @@
 
 #include "config.h"
 
-#define MAX_UPDATE_INTERVAL 30000
-#define LDR_THRESHOLD    200
-
-int sensorPin = A0; // select the input pin for LDR
+int sensorPin = SENSOR_PIN; // select the input pin for LDR
 
 /*
  * DECLARATIONS
